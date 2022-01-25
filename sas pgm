@@ -1,0 +1,19 @@
+/*==================================================================*/
+/*generate date in different format*/
+/*==================================================================*/
+proc format;
+	picture yearmonth (default=32)
+		other='%B' (datatype=date);
+run;
+
+/*Current date in YYYYMM (202201)*/;
+%let today2 = %sysfunc(today(),yymmn6.);
+
+/*Previous month date in YYYYMM (if today is 202201, then output 202112)*/
+%let lastmonth2 = %sysfunc(intnx(month, %sysfunc(today()),-1,e),yymmn6.);
+
+/*Current date in MONTH Name (if today is 202201, then output January)*/;
+%let today3 = %sysfunc(today(),yearmonth.);
+
+/*Current date in MONTH Name(if today is 202201, then output December)*/;
+%let lastmonth3 = %sysfunc(intnx(month, %sysfunc(today()),-1,e),yearmonth.);
